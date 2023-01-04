@@ -1,21 +1,21 @@
 import './App.css';
 import Header from './components/Header';
 import Map from './components/Map';
-// import { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
-// export var headerHeightContext = createContext('');
+export var coordinatesContext = createContext('');
 
 function App() {
-  // const [heightHeader, setHeigthHeader] = useState('');
+  const [coordinates, setCoordinates] = useState({});
   
   return (
     <>
-      {/* <headerHeightContext.Provider value={{ heightHeader, setHeigthHeader }}> */}
+      <coordinatesContext.Provider value={{ coordinates, setCoordinates }}>
           <div className="App">
               <Header />
               <Map />
           </div>
-      {/* </headerHeightContext.Provider> */}
+      </coordinatesContext.Provider>
   </>
   );
 }

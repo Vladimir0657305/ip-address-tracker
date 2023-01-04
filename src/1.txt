@@ -16,7 +16,7 @@ import { coordinatesContext } from '../App';
 
 
 export default function Map() {
-    const [map, setMap] = useState(null);
+    // const [map, setMap] = useState(null);
     // const [position, setPosition] = useState(() => map.getCenter())
     // https://github.com/mapshakers/leaflet-icon-pulse
     // var pulsingIcon = L.icon.pulse({ iconSize: [20, 20], color: 'red' });
@@ -36,55 +36,33 @@ export default function Map() {
     L.Marker.prototype.options.icon = DefaultIcon;
 
 
-    // const map = useMap();
-    // useEffect(() => {
-    //     map.off();
-        //     map.setView([+coordinates.lat || 51.505, +coordinates.lon || -0.09], 13)  
+    const map = useMap();
+    useEffect(() => {
+        map.off();  
+    //     map.setView([+coordinates.lat || 51.505, +coordinates.lon || -0.09], 13)  
         // parentMap.setView([+coordinates.lat || 51.505, +coordinates.lon || -0.09], 13) 
+        
+        map.getCenter([+coordinates.lat || 51.505, +coordinates.lon || -0.09])   
+    }, [coordinates])
 
-    //     map.getCenter([+coordinates.lat || 51.505, +coordinates.lon || -0.09])
-    // }, [coordinates])
-
-    const displayMap = useMemo(
-        () => (
-            
-            <MapContainer
-                center={position}
-                zoom={zoom}
-                scrollWheelZoom={true}
-                ref={setMap}>
+    return(
+        <>
+        {coordinates && 
+            <MapContainer center={position} zoom={13} scrollWheelZoom={true}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                
                 <Marker position={position}  >
                     <Popup>
+                        {/* A pretty CSS3 popup. <br /> Easily customizable. */}
                         Current location: {coordinates.lat}, {coordinates.lon}
                     </Popup>
                 </Marker>
+
             </MapContainer>
-        ),
-        [coordinates],
-    )
-
-    return (
-        <>
-            {/* {coordinates &&
-                <MapContainer center={position} zoom={13} scrollWheelZoom={true}>
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-
-                    <Marker position={position}  >
-                        <Popup>
-                            Current location: {coordinates.lat}, {coordinates.lon}
-                        </Popup>
-                    </Marker>
-
-                </MapContainer>
-            } */}
-            {displayMap}
+            }
         </>
     );
 }
