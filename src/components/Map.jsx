@@ -12,16 +12,40 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import L from 'leaflet';
 import { coordinatesContext } from '../App';
 
+var position = [51.505, -0.09];
+var zoom = 13;
 
+function DisplayPosition({ map }) {
+    const [position, setPosition] = useState({})
+
+    
+        map.setView(position, zoom)
+    
+
+    useEffect(() => {
+        map.on()
+        return () => {
+            map.off()
+        }
+    }, [map])
+
+    return (
+        <p>
+            latitude: {position.lat.toFixed(4)}, longitude: {position.lng.toFixed(4)}{' '}
+            {/* <button onClick={onClick}>reset</button> */}
+        </p>
+    )
+}
 
 
 export default function Map() {
     const [map, setMap] = useState(null);
+    const { isLoading, setIsLoading } = useContext(coordinatesContext);
     // const [position, setPosition] = useState(() => map.getCenter())
     // https://github.com/mapshakers/leaflet-icon-pulse
     // var pulsingIcon = L.icon.pulse({ iconSize: [20, 20], color: 'red' });
     // var marker = L.marker([51.505, -0.09], { icon: pulsingIcon }).addTo(map);
-    var position = [51.505, -0.09];
+    
     const { coordinates, setCoordinates } = useContext(coordinatesContext);
     position = [+coordinates.lat || 51.505, +coordinates.lon || -0.09];
     // setPosition(+coordinates.lat || 51.505, +coordinates.lon || -0.09)
@@ -35,9 +59,19 @@ export default function Map() {
     });
     L.Marker.prototype.options.icon = DefaultIcon;
 
+    useEffect(() => {
+        // console.log('change coordinates', isLoading)
+        const timer = setTimeout(() => {
+            map.setView(position, 11);
+        }, 50);
+        setIsLoading(false);
+        return () => clearTimeout(timer);
+        //     map.setView([+coordinates.lat || 51.505, +coordinates.lon || -0.09], 13)  
+    }, [isLoading])
 
     // const map = useMap();
     // useEffect(() => {
+    //     map.setView(position, zoom)
     //     map.off();
         //     map.setView([+coordinates.lat || 51.505, +coordinates.lon || -0.09], 13)  
         // parentMap.setView([+coordinates.lat || 51.505, +coordinates.lon || -0.09], 13) 
@@ -47,11 +81,11 @@ export default function Map() {
 
     const displayMap = useMemo(
         () => (
-            
             <MapContainer
                 center={position}
                 zoom={zoom}
-                scrollWheelZoom={true}
+                // scrollWheelZoom={true}
+                scrollWheelZoom='center'
                 ref={setMap}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -66,6 +100,12 @@ export default function Map() {
         ),
         [coordinates],
     )
+
+    const onClick = useCallback(() => {
+        map.setView(position, zoom)
+    }, [map])
+
+    
 
     return (
         <>
@@ -84,6 +124,7 @@ export default function Map() {
 
                 </MapContainer>
             } */}
+            {/* <button onClick={onClick}>RESET</button> */}
             {displayMap}
         </>
     );

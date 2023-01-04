@@ -9,10 +9,15 @@ import { coordinatesContext } from '../App';
 
 export default function Info(ipValue) {
     const { coordinates, setCoordinates } = useContext(coordinatesContext);
+    const { isLoading, setIsLoading } = useContext(coordinatesContext);
     useEffect(() => {
-        axios.get(`https://sys.airtel.lv/ip2country/${ipValue.value}/?full=true`).then(({ data }) => setCoordinates(data))
+        axios.get(`https://sys.airtel.lv/ip2country/${ipValue.value}/?full=true`).then(({ data }) => {
+            setCoordinates(data);
+            setIsLoading(true)
+        })
     },[]);
     // console.log(coordinates.lat, coordinates.lon);
+    console.log(isLoading);
 
     return(
         <>

@@ -17,7 +17,7 @@ export default function Header() {
 
     const changeIpValue = () => {
         setIpValue(refInput.current.value);
-        <Info/>
+        // <Info/>
         // console.log(ipValue);
     }
     

@@ -7,16 +7,17 @@ export var coordinatesContext = createContext('');
 
 function App() {
   const [coordinates, setCoordinates] = useState({});
-  
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <>
-      <coordinatesContext.Provider value={{ coordinates, setCoordinates }}>
-          <div className="App">
-              <Header />
-              <Map />
-          </div>
+      <coordinatesContext.Provider value={{ coordinates, setCoordinates, isLoading, setIsLoading }}>
+        <div className="App">
+          <Header />
+          <Map />
+        </div>
       </coordinatesContext.Provider>
-  </>
+    </>
   );
 }
 
