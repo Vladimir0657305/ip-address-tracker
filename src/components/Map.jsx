@@ -1,11 +1,17 @@
 import { MapContainer } from 'react-leaflet/MapContainer';
 import { TileLayer } from 'react-leaflet/TileLayer';
 import { useMap } from 'react-leaflet/hooks';
-import { useCallback, useMemo, useState } from 'react';
+import { Marker, Popup } from 'react-leaflet';
+import { useCallback, useMemo, useState, useContext } from 'react';
+import { heightHeader, setHeigthHeader } from '../App';
 import { useMapEvent, Rectangle } from 'react-leaflet';
 import { useEventHandlers } from '@react-leaflet/core';
 // import './Map.scss';
 import 'leaflet/dist/leaflet.css';
+// import icon from 'leaflet/dist/images/marker-icon.png';
+import icon from '../images/icon-location.svg';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import L from 'leaflet';
 
 const POSITION_CLASSES = {
     bottomleft: 'leaflet-bottom leaflet-left',
@@ -54,11 +60,11 @@ function MinimapControl({ position, zoom }) {
                 style={{ height: 80, width: 80 }}
                 center={parentMap.getCenter()}
                 zoom={mapZoom}
-                dragging={false}
-                doubleClickZoom={false}
+                dragging={true}
+                doubleClickZoom={true}
                 scrollWheelZoom={false}
                 attributionControl={false}
-                zoomControl={false}>
+                zoomControl={true}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <MinimapBounds parentMap={parentMap} zoom={mapZoom} />
             </MapContainer>
@@ -75,21 +81,33 @@ function MinimapControl({ position, zoom }) {
     )
 }
 
+
 export default function Map() {
-    
+    // https://github.com/mapshakers/leaflet-icon-pulse
+    // var pulsingIcon = L.icon.pulse({ iconSize: [20, 20], color: 'red' });
+    // var marker = L.marker([51.505, -0.09], { icon: pulsingIcon }).addTo(map);
+    var position = [51.505, -0.09];
+    const locationIcon ='../images/icon-location.svg'
+    const backgroundImage = "url(../images/icon-location.svg)";
+
+    let DefaultIcon = L.icon({
+        iconUrl: icon,
+        shadowUrl: iconShadow
+    });
+    L.Marker.prototype.options.icon = DefaultIcon;
 
     return(
         <>
-            <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+            <MapContainer center={position} zoom={13} scrollWheelZoom={true}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {/* <Marker position={[51.505, -0.09]}> */}
-                    {/* <Popup>
+                <Marker position={position}  >
+                    <Popup>
                         A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup> */}
-                {/* </Marker> */}
+                    </Popup>
+                </Marker>
             </MapContainer>
         </>
     );

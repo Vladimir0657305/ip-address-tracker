@@ -1,6 +1,6 @@
 .header {
     width: 100%;
-    // height: 100vh;
+    height: auto;
     margin: 0;
 }
 .header-top {
@@ -11,16 +11,19 @@
 
     & img {
         width: 100%;
-        height: auto;
+        // width: calc(280px + (500 - 20) * ((100vw - 380px) / (1240 - 380)));
+        height: 250px;
+        // height: calc(160px + (240 - 20) * ((100vw - 380px) / (1240 - 380)));
         object-fit: cover;
         // border: 1px solid red;
     }
     & h1 {
         position: absolute;
         top: 2rem;
-        left: 50%;
+        left: 49%;
         color: #fff;
         transform: translate3d(-50%, -50%, 0);
+        font-size: calc(20px + (40 - 20) * ((100vw - 380px) / (1240 - 380)));
     }
     
     
@@ -29,13 +32,14 @@
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 8rem;
+    top: 9rem;
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
 
     & button {
             width: 50px;
             height: 50px;
+            // height: calc(40px + (200 - 20) * ((100vw - 380px) / (1240 - 380)));
             border-top-right-radius: 15px;
             border-bottom-right-radius: 15px;
             margin-left: -2px;
@@ -52,7 +56,9 @@
         }
     & input {
             width: 500px;
+            width: calc(280px + (500 - 20) * ((100vw - 380px) / (1240 - 380)));
             height: 50px;
+            // height: calc(40px + (200 - 20) * ((100vw - 380px) / (1240 - 380)));
             border-top-left-radius: 15px;
             border-bottom-left-radius: 15px;
             border: none;
@@ -63,5 +69,18 @@
                     border: none;
                 }
         }
-    
 }
+@media (max-width:380px) {
+    .header-top {
+        & img {
+            height: 250px;
+        }
+    }
+    .header-input-block {
+        top: 7rem;
+        & input {
+            width: 260px;
+            font-size: 14px;
+        }
+    }
+    }
