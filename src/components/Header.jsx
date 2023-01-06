@@ -34,7 +34,7 @@ export default function Header() {
         arOut = arInpTemp[len-1] || 0;
         console.log('arInpTemp==>', arInpTemp, arInpTemp[1]);
         // arOut = arInpTemp[3] || arInpTemp[2] || arInpTemp[1] || arInpTemp[0];
-        // if (arInpTemp[3]?.length > 3 || tempInp.length > 15) return null;
+        if (arInpTemp[3]?.length > 3 || tempInp.length > 15) return null;
 
         // if (arInpTemp[3] !== undefined)  arOut = arInpTemp[3];
         // else if (arInpTemp[2] !== undefined)  arOut = arInpTemp[2];
@@ -86,7 +86,16 @@ export default function Header() {
                         ipValue && <Info value={ipValue} />
                     }
                 </div>
+                
+                <input type="text" data-inputmask="'mask': '[9-]AAA-999'" className="form-input" id="ipv4" name="ipv4" placeholder="xxx.xxx.xxx.xxx" />
+                <label>IP Address</label>
+            <input type="text" className="form-input" id="ipv4" name="ipv4" placeholder="xxx.xxx.xxx.xxx" />
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+            <script src='https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js'></script>
+            <script src="../script.js"></script> 
             </div>
+
+            
         </div>
     );
 }
