@@ -1,4 +1,4 @@
-// https://sys.airtel.lv/ip2country/193.194.110.139/?full=true
+// https://sys.airtel.lv/ip2country/193.194.110.111/?full=true
 // https://github.com/public-apis/public-apis#geocoding
 // https://www.frontendmentor.io/challenges/ip-address-tracker-I8-0yYAH0/hub
 // https://www.freecodecamp.org/news/how-to-set-up-a-custom-mapbox-basemap-with-gatsby-and-react-leaflet/
@@ -9,26 +9,23 @@ import ReactModal from 'react-modal';
 import './Error.scss';
 
 export default function Errorr() {
-    
+
     ReactModal.setAppElement('#root');
-    const [modalIsOpen, setModalIsOpen] = useState();
+    const [modalIsOpen, setModalIsOpen] = useState(true);
     const { isErrorr, setIsErrorr } = useContext(coordinatesContext);
-    console.log('isErrorr IN ERRORR=', isErrorr);
+
     useEffect(() => {
         setModalIsOpen(true);
-        console.log('isErrorr IN ERRORR=!!!', isErrorr);
-    },[isErrorr])
-    // setModalIsOpen(isErrorr);
-    // setIsErrorr(false)
+    }, [isErrorr])
+
     const onClickClose = () => {
         setModalIsOpen(false);
         setIsErrorr(false);
-        console.log('onClickClose WORK', isErrorr, modalIsOpen);
     }
-    
+
     return (
         <>
-            <ReactModal isOpen={modalIsOpen}  className="Modal" overlayClassName="Overlay">
+            <ReactModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} className="Modal" overlayClassName="Overlay">
                 <div className='modalClass'>
                     <div className="modalContentData">
                         {window.screen.availWidth > 600 ?

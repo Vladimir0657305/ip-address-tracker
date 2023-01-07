@@ -21,3 +21,10 @@ https://github.com/RobinHerbots/Inputmask
 npm install inputmask --save
 
 =======================
+
+https://www.npmjs.com/package/react-content-loader
+
+npm i react-content-loader --save
+
+=======================
+
