@@ -17,12 +17,9 @@ export default function Info(ipValue) {
     
     const { coordinates, setCoordinates } = useContext(coordinatesContext);
     const { isLoading, setIsLoading } = useContext(coordinatesContext);
-    const titles = ['IP ADDRESS', 'LOCATION', 'TIMEZONE', 'ISP'];
-    // const data = [ipValue, coordinates.city, coordinates.timezone.utc, coordinates.connection.domain];
     const [data, setData] = useState([]);
     const [dataMobile, setDataMobile] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(true);
-    const [modalData, setModalData] = useState(null);
 
     useEffect(() => {
         // axios.get(`https://sys.airtel.lv/ip2country/${ipValue.value}/?full=true`).then(({ data }) => {

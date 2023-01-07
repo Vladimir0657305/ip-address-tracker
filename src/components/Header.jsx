@@ -1,7 +1,8 @@
 import './Header.scss';
 import background from '../images/pattern-bg.png';
 import { createRef, useState } from 'react';
-import { isIP } from 'is-ip';
+import { isIP, isIPv4 } from 'is-ip';
+import Errorr from './Errorr';
 import Info from './Info';
 
 
@@ -9,6 +10,7 @@ export default function Header() {
     const refInput = createRef();
     const [inputValue, setInputValue] = useState('');
     const [ipValue, setIpValue] = useState('');
+    const [isErrorr, setIsErrorr] = useState(false);
 
     const onChangeInputValue = (event) => {
         event.preventDefault();
@@ -16,11 +18,14 @@ export default function Header() {
     }
 
     const changeIpValue = () => {
-        isIP(refInput.current.value) ?
-            setIpValue(refInput.current.value)
+        let temp = refInput.current.value
+        isIP(temp) ?
+            setIsErrorr(false)
             :
-            alert('You have entered an invalid IP address!')
+            // alert('You have entered an invalid IP address!')
+            setIsErrorr(true)
     }
+    console.log('isErrorr IN HEADER=', isErrorr);
 
     return (
         <div className='header' >
@@ -39,6 +44,9 @@ export default function Header() {
                     }
                 </div>
             </div>
+            {
+                isErrorr && <Errorr />
+            }
         </div>
     );
 }
