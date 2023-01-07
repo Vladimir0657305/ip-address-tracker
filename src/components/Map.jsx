@@ -27,6 +27,8 @@ export default function Map() {
     position = [+coordinates.latitude || 51.505, +coordinates.longitude || -0.09];
     let zoom = 13;
 
+    console.log(coordinates, isLoading);
+
     let DefaultIcon = L.icon({
         iconUrl: icon,
         shadowUrl: iconShadow
