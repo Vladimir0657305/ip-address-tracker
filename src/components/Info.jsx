@@ -19,7 +19,7 @@ export default function Info(ipValue) {
 
     useEffect(() => {
         // axios.get(`https://sys.airtel.lv/ip2country/${ipValue.value}/?full=true`).then(({ data }) => {
-        axios.get(`http://ipwho.is/${ipValue.value}`).then(({ data }) => {
+        axios.get(`https://ipwho.is/${ipValue.value}`).then(({ data }) => {
             setCoordinates(data);
             setModalIsOpen(true)
             setData(['IP ADDRESS', 'LOCATION', 'TIMEZONE', 'ISP', data.ip, data.city, data.timezone.utc, data.connection.domain]);
