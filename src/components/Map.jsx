@@ -1,7 +1,7 @@
 import { MapContainer } from 'react-leaflet/MapContainer';
 import { TileLayer } from 'react-leaflet/TileLayer';
 import { Marker, Popup } from 'react-leaflet';
-import { useCallback, useMemo, useState, useContext, useEffect } from 'react';
+import {  useMemo, useState, useContext, useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
 import icon from '../images/icon-location.svg';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -56,7 +56,7 @@ export default function Map() {
 
 
         
-    }, [coordinates])
+    }, [coordinates, isLoading])
 
     const displayMap = useMemo(
         () => (

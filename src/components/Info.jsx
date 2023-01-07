@@ -17,28 +17,12 @@ export default function Info(ipValue) {
     const [dataMobile, setDataMobile] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(true);
     const [isInfoLoading, setIsInfoLoading] = useState(false)
-    
+
     let question = ipValue.value ? `${ipValue.value}` : ''
     const BASE_URL = 'https://ipwho.is/';
     const searchByUrl = (question) => BASE_URL + question;
 
     useEffect(() => {
-        // var ip = ''; // Оставьте пустым для поиска текущего IP-адреса
-        // var XMLHttp = new XMLHttpRequest();
-        // XMLHttp.onreadystatechange = function () {
-        //     if (this.readyState == 4 && this.status == 200) {
-        //         var ipwhois = JSON.parse(this.responseText);
-        //         console.log(ipwhois.country + ' ' + ipwhois.flag.emoji, ipwhois.ip, ipwhois.city, ipwhois.timezone.utc, ipwhois.connection.domain);
-        //     }
-            // setData(['IP ADDRESS', 'LOCATION', 'TIMEZONE', 'ISP', ipwhois.ip, ipwhois.city, ipwhois.timezone.utc, ipwhois.connection.domain]);
-            // setDataMobile(['IP ADDRESS', ipwhois.ip, 'LOCATION', ipwhois.city, 'TIMEZONE', ipwhois.timezone.utc, 'ISP', ipwhois.connection.domain]);
-            // setIsLoading(true);
-            // console.log(ipwhois, data, isLoading);
-        // };
-        // XMLHttp.open('GET', 'https://ipwho.is/' + ip, true);
-        // XMLHttp.send();
-        
-        
         // axios.get(`https://sys.airtel.lv/ip2country/${ipValue.value}/?full=true`).then(({ data }) => {
         axios.get(searchByUrl(question)).then(({ data }) => {
             setCoordinates(data);
@@ -47,20 +31,14 @@ export default function Info(ipValue) {
             setDataMobile(['IP ADDRESS', data.ip, 'LOCATION', data.city, 'TIMEZONE', data.timezone.utc, 'ISP', data.connection.domain]);
             setIsLoading(prev => true);
             setIsInfoLoading(prev => true);
-            console.log('work', data, isLoading, isInfoLoading)
         }).catch(err => {
-                console.warn(err);
-                alert('ERROR');
+            console.warn(err);
+            alert('ERROR');
         }).finally(() => {
             setIsLoading(prev => true);
             setIsInfoLoading(prev => true);
-            console.log(isLoading, isInfoLoading);
         })
     }, [ipValue.value]);
-
-    console.log('INFO=', isLoading, data)
-    
-    
 
     return (
         <>
