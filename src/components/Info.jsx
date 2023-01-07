@@ -27,7 +27,7 @@ export default function Info(ipValue) {
         })
             .catch(err => {
                 console.warn(err);
-                alert('ERRORR');
+                alert('ERROR');
             })
             .finally(setIsLoading(true));
     }, [ipValue.value]);
