@@ -1,7 +1,7 @@
 import { MapContainer } from 'react-leaflet/MapContainer';
 import { TileLayer } from 'react-leaflet/TileLayer';
 import { Marker, Popup } from 'react-leaflet';
-import {  useMemo, useState, useContext, useEffect } from 'react';
+import { useMemo, useState, useContext, useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
 import icon from '../images/icon-location.svg';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -25,7 +25,7 @@ export default function Map() {
     // var pulsingIcon = L.icon.pulse({ iconSize: [20, 20], color: 'red' });
     // var marker = L.marker([51.505, -0.09], { icon: pulsingIcon }).addTo(map);
     const { coordinates, setCoordinates } = useContext(coordinatesContext);
-    position = [+coordinates.latitude , +coordinates.longitude ];
+    position = [+coordinates.latitude, +coordinates.longitude];
     let zoom = 13;
     console.log('MAP= ', isLoading);
 
@@ -55,7 +55,7 @@ export default function Map() {
         return () => clearTimeout(timer);
 
 
-        
+
     }, [coordinates, isLoading])
 
     const displayMap = useMemo(
@@ -79,14 +79,14 @@ export default function Map() {
         [coordinates, isLoading]
     )
 
-    
+
 
     return (
         <>
-        
+
             {displayMap}
             {/* {first} */}
-        
+
         </>
     );
 }
