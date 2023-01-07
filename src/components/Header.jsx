@@ -45,7 +45,8 @@ export default function Header() {
                         <img src='../images/icon-arrow.svg' className='headerSvg' alt='arrow' />
                     </button>
                     {
-                        ipValue && <Info value={ipValue} />
+                        // ipValue && <Info value={ipValue} />
+                        <Info value={ipValue} />
                     }
                 </div>
             </div>
