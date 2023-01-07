@@ -35,7 +35,7 @@ export default function Header() {
     return (
         <div className='header' >
             <div className="header-top" >
-                <img src={background} alt='background' />
+                <img src={background} alt='background' className='background'/>
                 <h1>IP Address Tracker</h1>
                 <div className='header-input-block' onKeyPress={handleAnswerChange}>
                     <input onFocus={() => setInputValue("")} value={inputValue} onChange={onChangeInputValue} ref={refInput}

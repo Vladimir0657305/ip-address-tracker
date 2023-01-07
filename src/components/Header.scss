@@ -64,10 +64,11 @@
             }
     }
 }
+
 @media (max-width:380px) {
     .header-top {
-        & img {
-            height: 200px;
+        .background {
+            height: 180px;
         }
     }
     .header-input-block {
