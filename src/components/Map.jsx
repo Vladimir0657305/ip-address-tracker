@@ -27,15 +27,6 @@ export default function Map() {
     const { coordinates, setCoordinates } = useContext(coordinatesContext);
     position = [+coordinates.latitude, +coordinates.longitude];
     let zoom = 13;
-    console.log('MAP= ', isLoading);
-
-    const first = useEffect(() => {
-        const timer = setTimeout(() => {
-            console.log('This will run after 1 second!')
-        }, 500);
-        return () => clearTimeout(timer);
-    }, []);
-
 
     let DefaultIcon = L.icon({
         iconUrl: icon,
@@ -44,18 +35,14 @@ export default function Map() {
     L.Marker.prototype.options.icon = DefaultIcon;
 
     useEffect(() => {
-        console.log(isLoading, position);
-
         const timer = setTimeout(() => {
-            console.log('This will run after 0.5 second!')
-            isLoading && map.setView(position, 11);
+            // isLoading && map.setView(position, 11);
+            isLoading && map.flyTo(position, 13, {
+                animate: true,
+            });
             setIsLoading(false);
-
         }, 500);
         return () => clearTimeout(timer);
-
-
-
     }, [coordinates, isLoading])
 
     const displayMap = useMemo(
@@ -85,7 +72,6 @@ export default function Map() {
         <>
 
             {displayMap}
-            {/* {first} */}
 
         </>
     );
