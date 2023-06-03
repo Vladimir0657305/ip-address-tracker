@@ -6,6 +6,7 @@
 .pnp.js
 .zip
 .rar
+.7z
 
 # testing
 /coverage
